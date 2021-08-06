@@ -23,6 +23,12 @@ namespace DatabaseModule {
 		public async sync (): Promise<void> {
 			try {
 				const message = await this.createDatabase()
+				this.database = mysql.createConnection({
+					host: config.database.host,
+					user: config.database.user,
+					password: config.database.password,
+					database: config.database.database_name
+				})
 				console.log(message)
 				try {
 					const sqlArr: string[] = [
@@ -74,12 +80,7 @@ namespace DatabaseModule {
 		}
 
 		protected get connection (): any {
-			return mysql.createConnection({
-				host: config.database.host,
-				user: config.database.user,
-				password: config.database.password,
-				database: config.database.database_name
-			})
+			return this.database
 		}
 
 		protected connect (): void {
