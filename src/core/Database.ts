@@ -67,12 +67,6 @@ namespace DatabaseModule {
 					if (err) {
 						return reject(err)
 					} else {
-						this.database = mysql.createConnection({
-							host: config.database.host,
-							user: config.database.user,
-							password: config.database.password,
-							database: config.database.database_name
-						})
 						return resolve('Database has been created')
 					}
 				})
@@ -80,7 +74,12 @@ namespace DatabaseModule {
 		}
 
 		protected get connection (): any {
-			return this.database
+			return mysql.createConnection({
+				host: config.database.host,
+				user: config.database.user,
+				password: config.database.password,
+				database: config.database.database_name
+			})
 		}
 
 		protected connect (): void {

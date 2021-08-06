@@ -11,3 +11,13 @@ export type ResponseType = {
 		previousPage?: string
 	}
 }
+
+export type ResultsType = {
+	length: number
+}
+
+export type RegisterBody = {
+	email: string,
+	fullName: string,
+	password: string
+}

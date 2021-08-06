@@ -25,6 +25,7 @@
   },
   "homepage": "https://github.com/mathiuskormasela12/ams-backend#readme",
   "devDependencies": {
+    "@types/bcryptjs": "^2.4.2",
     "@types/compression": "^1.7.1",
     "@types/cors": "^2.8.12",
     "@types/express": "^4.17.13",

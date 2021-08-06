@@ -6,6 +6,9 @@ import RouteModule from './Router'
 // import all controllers
 import authController from '../controllers/Auth'
 
+// import all middlewares
+import { checkRegisterBody, isPasswordCorrect } from '../middlewares/auth'
+
 namespace AuthModule {
 	export class Auth extends RouteModule.Route {
 		constructor () {
@@ -14,7 +17,7 @@ namespace AuthModule {
 		}
 
 		protected route (): void {
-			this.getRouter.post('/auth/register', authController.Auth.register)
+			this.getRouter.post('/auth/register', checkRegisterBody, isPasswordCorrect, authController.Auth.register)
 		}
 
 		public get auth (): Router {
