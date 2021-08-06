@@ -2,20 +2,12 @@
 // import all modules
 import { Request, Response, NextFunction } from 'express'
 import response from '../helpers/response'
+import isFormFill from '../helpers/isFormFill'
 
 export const checkRegisterBody = (req: Request, res: Response, next: NextFunction) => {
 	const body = ['email', 'password', 'full_name']
-	let isFilled = ''
 
-	body.forEach(item => {
-		if (!req.body[item]) {
-			isFilled += String(false)
-		} else {
-			isFilled += String(true)
-		}
-	})
-
-	if (isFilled.includes('false')) {
+	if (!isFormFill(body, req.body)) {
 		return response(req, res, "Form can't be empty", 400, false)
 	}
 
