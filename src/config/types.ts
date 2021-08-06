@@ -12,10 +12,6 @@ export type ResponseType = {
 	}
 }
 
-export type ResultsType = {
-	length: number
-}
-
 export type RegisterBody = {
 	email: string,
 	fullName: string,

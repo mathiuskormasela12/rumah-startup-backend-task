@@ -7,7 +7,7 @@ import RouteModule from './Router'
 import authController from '../controllers/Auth'
 
 // import all middlewares
-import { checkRegisterBody, isPasswordCorrect } from '../middlewares/auth'
+import { checkRegisterBody, isPasswordCorrect, checkLoginBody } from '../middlewares/auth'
 
 namespace AuthModule {
 	export class Auth extends RouteModule.Route {
@@ -18,6 +18,7 @@ namespace AuthModule {
 
 		protected route (): void {
 			this.getRouter.post('/auth/register', checkRegisterBody, isPasswordCorrect, authController.Auth.register)
+			this.getRouter.post('/auth/login', checkLoginBody, isPasswordCorrect, authController.Auth.login)
 		}
 
 		public get auth (): Router {

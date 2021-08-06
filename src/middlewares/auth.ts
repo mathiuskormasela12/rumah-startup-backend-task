@@ -21,3 +21,13 @@ export const isPasswordCorrect = (req: Request, res: Response, next: NextFunctio
 
 	return next()
 }
+
+export const checkLoginBody = (req: Request, res: Response, next: NextFunction) => {
+	const body = ['email', 'password']
+
+	if (!isFormFill(body, req.body)) {
+		return response(req, res, "Form can't be empty", 400, false)
+	}
+
+	return next()
+}
