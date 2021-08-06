@@ -14,7 +14,7 @@ namespace AuthModule {
 		}
 
 		protected route (): void {
-			this.getRouter.get('/auth/register', authController.Auth.register)
+			this.getRouter.post('/auth/register', authController.Auth.register)
 		}
 
 		public get auth (): Router {
