@@ -46,6 +46,10 @@ namespace AppModule {
 			// setup static files
 			this.app.use(express.static(path.join(__dirname, '../../public')))
 
+			// setup template engine
+			this.app.set('views', path.join(__dirname, '../templates'))
+			this.app.set('view engine', 'hbs')
+
 			// setup cors
 			const corsOption = {
 				origin: function (origin: any, callback: any): void {
