@@ -1,7 +1,7 @@
 // ========== IRouter
 
 interface IRoute {
-	setup(): void
+	route(): void
 }
 
 export default IRoute

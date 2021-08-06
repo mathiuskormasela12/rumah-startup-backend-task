@@ -18,6 +18,7 @@ import IApp from '../config/IApp'
 
 // import all routes
 import authRoute from '../routes/Auth'
+import userRoute from '../routes/User'
 
 const database = new Database.Database()
 
@@ -59,6 +60,7 @@ namespace AppModule {
 			this.app.use(cors(corsOption))
 
 			this.app.use('/api/v2', authRoute.auth)
+			this.app.use('/api/v2', userRoute.user)
 
 			database.sync()
 		}

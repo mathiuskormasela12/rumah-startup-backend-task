@@ -16,7 +16,7 @@ namespace AuthModule {
 			this.route()
 		}
 
-		protected route (): void {
+		public route (): void {
 			this.getRouter.post('/auth/register', checkRegisterBody, isPasswordCorrect, authController.Auth.register)
 			this.getRouter.post('/auth/login', checkLoginBody, isPasswordCorrect, authController.Auth.login)
 		}

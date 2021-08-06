@@ -5,11 +5,11 @@ import { RegisterBody } from '../config/types'
 
 namespace UserModule {
 	export class User extends DatabaseModule.Database {
-		public findAll<T> (email: string): Promise<T> {
+		public findAll<T> (body: T): Promise<T> {
 			return new Promise((resolve: any, reject: any) => {
-				const sql = 'SELECT * FROM users WHERE email = ?'
+				const sql = `SELECT * FROM users WHERE ${Object.keys(body).map((items, index) => `${items}='${Object.values(body)[index]}'`)}`
 
-				this.connection.query(sql, email, (err: Error, results: any[]) => {
+				this.connection.query(sql, (err: Error, results: any[]) => {
 					if (err) {
 						return reject(err)
 					} else {
@@ -28,6 +28,20 @@ namespace UserModule {
 					email: body.email
 				}
 				this.connection.query(sql, data, (err: Error) => {
+					if (err) {
+						return reject(err)
+					} else {
+						return resolve(true)
+					}
+				})
+			})
+		}
+
+		public update<T> (body: T): Promise<T> {
+			return new Promise((resolve: any, reject: any) => {
+				const sql = 'UPDATE users SET ?'
+
+				this.connection.query(sql, body, (err: Error) => {
 					if (err) {
 						return reject(err)
 					} else {

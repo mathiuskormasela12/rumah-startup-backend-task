@@ -16,7 +16,9 @@ namespace AuthControllerModule {
 	export class Auth {
 		public static async register (req: Request, res: Response): Promise<Response> {
 			try {
-				const results: any = await users.findAll(req.body.email)
+				const results: any = await users.findAll({
+					email: req.body.email
+				})
 
 				if (results.length > 0) {
 					return response(req, res, 'Email already in used', 400, false)
@@ -48,7 +50,9 @@ namespace AuthControllerModule {
 
 		public static async login (req: Request, res: Response): Promise<Response> {
 			try {
-				const results: any = await users.findAll(req.body.email)
+				const results: any = await users.findAll({
+					email: req.body.email
+				})
 				try {
 					if (results.length < 1 || !(await bcrypt.compare(req.body.password, results[0].password))) {
 						return response(req, res, 'Wrong email or password', 400, false)

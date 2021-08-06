@@ -17,3 +17,10 @@ export type RegisterBody = {
 	fullName: string,
 	password: string
 }
+
+export type UploadPhoto = {
+	message: string,
+	success: boolean,
+	status: number,
+	photo?: string
+}
