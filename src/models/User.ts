@@ -5,9 +5,9 @@ import { RegisterBody } from '../config/types'
 
 namespace UserModule {
 	export class User extends DatabaseModule.Database {
-		public findAll<T> (body: T): Promise<T> {
+		public findAll<T> (condition: T): Promise<T> {
 			return new Promise((resolve: any, reject: any) => {
-				const sql = `SELECT * FROM users WHERE ${Object.keys(body).map((items, index) => `${items}='${Object.values(body)[index]}'`)}`
+				const sql = `SELECT * FROM users WHERE ${Object.keys(condition).map((items, index) => `${items}='${Object.values(condition)[index]}'`)}`
 
 				this.connection.query(sql, (err: Error, results: any[]) => {
 					if (err) {
@@ -37,11 +37,25 @@ namespace UserModule {
 			})
 		}
 
-		public update<T> (body: T): Promise<T> {
+		public update<T> (body: T, condition: any): Promise<T> {
 			return new Promise((resolve: any, reject: any) => {
-				const sql = 'UPDATE users SET ?'
+				const sql = `UPDATE users SET ? WHERE ${Object.keys(condition).map((items, index) => `${items}='${Object.values(condition)[index]}'`)}`
 
 				this.connection.query(sql, body, (err: Error) => {
+					if (err) {
+						return reject(err)
+					} else {
+						return resolve(true)
+					}
+				})
+			})
+		}
+
+		public delete<T> (condition:T): Promise<T> {
+			return new Promise((resolve: any, reject: any) => {
+				const sql = `DELETE FROM users WHERE ${Object.keys(condition).map((items, index) => `${items}='${Object.values(condition)[index]}'`)}`
+
+				this.connection.query(sql, condition, (err: Error) => {
 					if (err) {
 						return reject(err)
 					} else {
