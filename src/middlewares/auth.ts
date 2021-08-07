@@ -49,3 +49,13 @@ export const isLogin = (req: Request, res: Response, next: NextFunction) => {
 		return response(req, res, 'Forbidden', 400, false)
 	}
 }
+
+export const checkEditUserBody = (req: Request, res: Response, next: NextFunction) => {
+	const body = ['email', 'full_name']
+
+	if (!isFormFill(body, req.body)) {
+		return response(req, res, "Form can't be empty", 400, false)
+	}
+
+	return next()
+}

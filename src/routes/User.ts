@@ -8,7 +8,7 @@ import upload from 'express-fileupload'
 import userController from '../controllers/User'
 
 // import all middlewares
-import { isLogin } from '../middlewares/auth'
+import { isLogin, checkEditUserBody } from '../middlewares/auth'
 
 namespace UserModule {
 	export class User extends RouteModule.Route {
@@ -21,7 +21,9 @@ namespace UserModule {
 			this.getRouter.use(upload({
 				createParentPath: true
 			}))
+			this.getRouter.get('/user/:id', isLogin, userController.User.getUserById)
 			this.getRouter.put('/user/photo/:id', isLogin, userController.User.upload)
+			this.getRouter.put('/user/:id', isLogin, checkEditUserBody, userController.User.editUserById)
 			this.getRouter.delete('/user/:id', isLogin, userController.User.deleteUser)
 		}
 

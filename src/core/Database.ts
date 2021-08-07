@@ -37,7 +37,7 @@ namespace DatabaseModule {
 							full_name varchar(255),
 							email varchar(255) UNIQUE NOT NULL,
 							password varchar(255) NOT NULL,
-							photo varchar(255) DEFAULT 'nophoto.png',
+							photo varchar(255) NOT NULL DEFAULT 'nophoto.png',
 							created_at timestamp DEFAULT CURRENT_TIMESTAMP,
 							updated_at datetime DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
 						);`,
@@ -51,7 +51,7 @@ namespace DatabaseModule {
 							birth_place varchar(255) NOT NULL,
 							email varchar(255) UNIQUE NOT NULL,
 							password varchar(255) NOT NULL,
-							photo varchar(255) DEFAULT 'nophoto.png',
+							photo varchar(255) NOT NULL DEFAULT 'nophoto.png',
 							created_at timestamp DEFAULT CURRENT_TIMESTAMP,
 							updated_at datetime DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
 						);`
