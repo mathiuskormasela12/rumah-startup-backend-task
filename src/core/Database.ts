@@ -43,14 +43,13 @@ namespace DatabaseModule {
 						);`,
 						`CREATE TABLE IF NOT EXISTS students (
 							id int AUTO_INCREMENT PRIMARY KEY NOT NULL,
-							full_name varchar(255),
+							student_name varchar(255),
 							nisn char(5) NOT NULL UNIQUE,
 							class varchar(50) NOT NULL,
 							major varchar(255) NOT NULL,
 							birthday date NOT NULL,
 							birth_place varchar(255) NOT NULL,
 							email varchar(255) UNIQUE NOT NULL,
-							password varchar(255) NOT NULL,
 							photo varchar(255) NOT NULL DEFAULT 'nophoto.png',
 							created_at timestamp DEFAULT CURRENT_TIMESTAMP,
 							updated_at datetime DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP

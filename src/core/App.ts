@@ -19,6 +19,7 @@ import IApp from '../config/IApp'
 // import all routes
 import authRoute from '../routes/Auth'
 import userRoute from '../routes/User'
+import studentRoute from '../routes/Student'
 
 const database = new Database.Database()
 
@@ -65,6 +66,7 @@ namespace AppModule {
 
 			this.app.use('/api/v2', authRoute.auth)
 			this.app.use('/api/v2', userRoute.user)
+			this.app.use('/api/v2', studentRoute.student)
 
 			database.sync()
 		}

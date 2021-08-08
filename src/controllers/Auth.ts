@@ -21,7 +21,7 @@ namespace AuthControllerModule {
 				})
 
 				if (results.length > 0) {
-					return response(req, res, 'Email already in used', 400, false)
+					return response(req, res, 'The email already in used', 400, false)
 				} else {
 					try {
 						try {

@@ -14,36 +14,6 @@ import userModel from '../models/User'
 
 namespace UserControllerModule {
 	export class User {
-		public static async upload (req: Request, res: Response): Promise<Response> {
-			try {
-				const results: any = await userModel.findAll({
-					id: req.params.id
-				})
-
-				if (results.length < 1) {
-					return response(req, res, 'Unknown user', 400, false)
-				} else {
-					const photo = uploads(req, '/photos/admins/')
-					try {
-						await userModel.update({
-							photo: photo.photo
-						}, {
-							id: req.params.id
-						})
-						return response(req, res, photo.message, photo.status, photo.success, {
-							photo: photo.photo
-						})
-					} catch (err) {
-						console.log(err)
-						return response(req, res, err.message, 500, false)
-					}
-				}
-			} catch (err) {
-				console.log(err)
-				return response(req, res, err.message, 500, false)
-			}
-		}
-
 		public static async deleteUser (req: Request, res: Response): Promise<Response> {
 			const {
 				id

@@ -1,13 +1,12 @@
 // ========== User Model
 // import all modules
 import DatabaseModule from '../core/Database'
-import { RegisterBody } from '../config/types'
 
-namespace UserModule {
-	export class User extends DatabaseModule.Database {
+namespace StudentModule {
+	export class Student extends DatabaseModule.Database {
 		public findAll<T> (condition: T): Promise<T> {
 			return new Promise((resolve: any, reject: any) => {
-				const sql = `SELECT * FROM users WHERE ${Object.keys(condition).map((items, index) => `${items}='${Object.values(condition)[index]}'`)}`
+				const sql = `SELECT * FROM students WHERE ${Object.keys(condition).map((items, index) => `${items}='${Object.values(condition)[index]}'`)}`
 
 				this.connection.query(sql, (err: Error, results: any[]) => {
 					if (err) {
@@ -19,14 +18,9 @@ namespace UserModule {
 			})
 		}
 
-		public create<T> (body: RegisterBody): Promise<T> {
+		public create<T> (data: T): Promise<T> {
 			return new Promise((resolve: any, reject: any) => {
-				const sql = 'INSERT INTO users SET ?'
-				const data = {
-					full_name: body.fullName,
-					password: body.password,
-					email: body.email
-				}
+				const sql = 'INSERT INTO students SET ?'
 				this.connection.query(sql, data, (err: Error, results: any) => {
 					if (err) {
 						return reject(err)
@@ -39,7 +33,7 @@ namespace UserModule {
 
 		public update<T> (body: T, condition: any): Promise<T> {
 			return new Promise((resolve: any, reject: any) => {
-				const sql = `UPDATE users SET ? WHERE ${Object.keys(condition).map((items, index) => `${items}='${Object.values(condition)[index]}'`)}`
+				const sql = `UPDATE students SET ? WHERE ${Object.keys(condition).map((items, index) => `${items}='${Object.values(condition)[index]}'`)}`
 
 				this.connection.query(sql, body, (err: Error) => {
 					if (err) {
@@ -53,7 +47,7 @@ namespace UserModule {
 
 		public delete<T> (condition:T): Promise<T> {
 			return new Promise((resolve: any, reject: any) => {
-				const sql = `DELETE FROM users WHERE ${Object.keys(condition).map((items, index) => `${items}='${Object.values(condition)[index]}'`)}`
+				const sql = `DELETE FROM students WHERE ${Object.keys(condition).map((items, index) => `${items}='${Object.values(condition)[index]}'`)}`
 
 				this.connection.query(sql, condition, (err: Error) => {
 					if (err) {
@@ -67,4 +61,4 @@ namespace UserModule {
 	}
 }
 
-export default new UserModule.User()
+export default new StudentModule.Student()

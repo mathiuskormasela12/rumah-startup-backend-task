@@ -22,7 +22,6 @@ namespace UserModule {
 				createParentPath: true
 			}))
 			this.getRouter.get('/user/:id', isLogin, userController.User.getUserById)
-			this.getRouter.put('/user/photo/:id', isLogin, userController.User.upload)
 			this.getRouter.put('/user/:id', isLogin, checkEditUserBody, userController.User.editUserById)
 			this.getRouter.delete('/user/:id', isLogin, userController.User.deleteUser)
 		}
