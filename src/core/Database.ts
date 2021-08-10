@@ -41,18 +41,26 @@ namespace DatabaseModule {
 							created_at timestamp DEFAULT CURRENT_TIMESTAMP,
 							updated_at datetime DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
 						);`,
+						`CREATE TABLE IF NOT EXISTS majors (
+							id int AUTO_INCREMENT PRIMARY KEY NOT NULL,
+							major_name varchar(255) NOT NULL,
+							major_description varchar(255) NOT NULL,
+							created_at timestamp DEFAULT CURRENT_TIMESTAMP,
+							updated_at datetime DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+						);`,
 						`CREATE TABLE IF NOT EXISTS students (
 							id int AUTO_INCREMENT PRIMARY KEY NOT NULL,
 							student_name varchar(255),
 							nisn char(5) NOT NULL UNIQUE,
 							class varchar(50) NOT NULL,
-							major varchar(255) NOT NULL,
+							major int NOT NULL,
 							birthday date NOT NULL,
 							birth_place varchar(255) NOT NULL,
 							email varchar(255) UNIQUE NOT NULL,
 							photo varchar(255) NOT NULL DEFAULT 'nophoto.png',
 							created_at timestamp DEFAULT CURRENT_TIMESTAMP,
-							updated_at datetime DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+							updated_at datetime DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+							FOREIGN KEY (major) REFERENCES majors(id)
 						);`
 					]
 					const message = await bulkCreateTables(this.database, sqlArr)
