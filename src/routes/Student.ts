@@ -21,6 +21,7 @@ namespace StudentModule {
 			this.getRouter.post('/student', isLogin, checkAddStudentBody, studentController.Student.addStudent)
 			this.getRouter.delete('/student/:id', isLogin, studentController.Student.deleteStudent)
 			this.getRouter.get('/student/:id', isLogin, studentController.Student.getStudentById)
+			this.getRouter.patch('/student/:id', isLogin, studentController.Student.editStudent)
 		}
 
 		public get student (): Router {

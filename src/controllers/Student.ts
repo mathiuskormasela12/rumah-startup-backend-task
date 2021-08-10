@@ -128,6 +128,71 @@ namespace StudentControllerModule {
 				return response(req, res, err.message, 500, false)
 			}
 		}
+
+		public static async editStudent (req: Request, res: Response): Promise<Response> {
+			try {
+				const results: any = await studentModel.findAll({
+					id: req.params.id
+				})
+				if (req.files) {
+					const photo: any = uploads(req, '/photos/students/')
+
+					if (!photo.success) {
+						return response(req, res, photo.message, photo.status, photo.success)
+					}
+
+					req.body.photo = photo.photo
+				}
+
+				try {
+					await studentModel.update({
+						student_name: req.body.student_name || results[0].student_name,
+						nisn: req.body.nisn || results[0].nisn,
+						photo: req.body.photo || results[0].photo,
+						class: req.body.class || results[0].class,
+						major: req.body.major || results[0].major,
+						birthday: req.body.birthday || results[0].birthday,
+						birth_place: req.body.birth_place || results[0].birth_place,
+						email: req.body.email || results[0].email
+					}, { id: req.params.id })
+
+					if (req.files) {
+						try {
+							await deleteFile(`/photos/students/${results[0].photo}`)
+							return response(req, res, 'Successfully to edit student', 200, true, {
+								...req.body,
+								photo: `${config.public_url}/photos/students/${req.body.photo}`
+							})
+						} catch (errDelete) {
+							console.log(errDelete.message)
+							return response(req, res, errDelete.message, 500, false)
+						}
+					} else {
+						return response(req, res, 'Successfully to edit student', 200, true, {
+							...req.body,
+							photo: `${config.public_url}/photos/students/${req.body.photo}`
+						})
+					}
+				} catch (err) {
+					if (req.files) {
+						try {
+							await deleteFile(`/photos/students/${req.body.photo}`)
+							return response(req, res, err.message, 500, false)
+						} catch (errDelete) {
+							console.log(errDelete.message)
+							console.log(err.message)
+							return response(req, res, errDelete.message, 500, false)
+						}
+					} else {
+						console.log(err.message)
+						return response(req, res, err.message, 500, false)
+					}
+				}
+			} catch (err) {
+				console.log(err.message)
+				return response(req, res, err.message, 500, false)
+			}
+		}
 	}
 }
 export default StudentControllerModule
