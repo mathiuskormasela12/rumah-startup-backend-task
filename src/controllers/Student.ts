@@ -1,6 +1,7 @@
 // ========== User Controller
 // import all modules
 import { Request, Response } from 'express'
+import moment from 'moment'
 import config from '../config'
 import deleteFile from '../helpers/deleteFile'
 
@@ -195,6 +196,51 @@ namespace StudentControllerModule {
 				}
 			} catch (err) {
 				console.log(err.message)
+				return response(req, res, err.message, 500, false)
+			}
+		}
+
+		public static async getAllStudents (req: Request, res: Response): Promise<Response> {
+			const {
+				search = '',
+				limit = 4,
+				page = 1
+			}: any = req.query
+			try {
+				const count: number = await studentModel.countAll({
+					keyword: search
+				})
+				const startData: number = (Number(limit) * Number(page)) - Number(limit)
+				const totalPages: number = Math.ceil(Number(count) / Number(limit))
+
+				try {
+					const results: any = await studentModel.findAll(null, {
+						keyword: search,
+						limit,
+						offset: startData
+					})
+
+					if (results.length < 1) {
+						return response(req, res, 'The student data not avaliable', 400, false)
+					} else {
+						const data = results.map((item: any) => ({
+							id: item.id,
+							student_name: item.student_name,
+							nisn: item.nisn,
+							class: `${item.class} - ${item.major}`,
+							birthday: `${item.birth_place}, ${moment(item.birthday).format('DD MMMM YYYY')}`,
+							email: item.email,
+							photo: `${config.public_url}/photos/students/${item.photo}`
+						}))
+
+						return response(req, res, 'Successfully to get data student', 200, true, data, Number(count), Number(totalPages), Number(page))
+					}
+				} catch (err) {
+					console.log(err)
+					return response(req, res, err.message, 500, false)
+				}
+			} catch (err) {
+				console.log(err)
 				return response(req, res, err.message, 500, false)
 			}
 		}
