@@ -134,6 +134,11 @@ namespace StudentControllerModule {
 				const results: any = await studentModel.findAll({
 					id: req.params.id
 				})
+
+				if (results.length < 1) {
+					return response(req, res, 'Uknown user', 400, false)
+				}
+
 				if (req.files) {
 					const photo: any = uploads(req, '/photos/students/')
 
