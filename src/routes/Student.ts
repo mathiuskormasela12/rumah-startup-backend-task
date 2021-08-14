@@ -23,6 +23,7 @@ namespace StudentModule {
 			this.getRouter.get('/student/:id', isLogin, studentController.Student.getStudentById)
 			this.getRouter.patch('/student/:id', isLogin, studentController.Student.editStudent)
 			this.getRouter.get('/student', isLogin, studentController.Student.getAllStudents)
+			this.getRouter.get('/pdf/student/:id', studentController.Student.getStudentReport)
 		}
 
 		public get student (): Router {

@@ -8,6 +8,9 @@ import deleteFile from '../helpers/deleteFile'
 // import all helpers
 import response from '../helpers/response'
 import uploads from '../helpers/upload'
+import readFile from '../helpers/readFile'
+import renderTemplate from '../helpers/renderTemplate'
+import generatePdf from '../helpers/generatePdf'
 
 // import models
 import studentModel from '../models/Student'
@@ -234,6 +237,44 @@ namespace StudentControllerModule {
 						}))
 
 						return response(req, res, 'Successfully to get data student', 200, true, data, Number(count), Number(totalPages), Number(page))
+					}
+				} catch (err) {
+					console.log(err)
+					return response(req, res, err.message, 500, false)
+				}
+			} catch (err) {
+				console.log(err)
+				return response(req, res, err.message, 500, false)
+			}
+		}
+
+		public static async getStudentReport (req: Request, res: Response): Promise<Response> {
+			try {
+				const file = await readFile('../templates/student_report.hbs')
+				try {
+					const reportData: any = await studentModel.findAll({ id: req.params.id })
+
+					if (reportData.length < 1) {
+						return response(req, res, 'Report is unavailable', 400, false)
+					}
+
+					try {
+						const results = await renderTemplate(file, {
+							student_name: reportData[0].student_name ? reportData[0].student_name : '-',
+							photo: reportData[0].photo ? String(process.env.PUBLIC_URL).concat('/photos', '/students/', reportData[0].photo) : '-'
+						})
+
+						try {
+							const pdf = await generatePdf(results)
+							res.set('Content-Type', 'application/pdf')
+							return res.send(pdf)
+						} catch (err) {
+							console.log(err)
+							return response(req, res, err.message, 500, false)
+						}
+					} catch (err) {
+						console.log(err)
+						return response(req, res, err.message, 500, false)
 					}
 				} catch (err) {
 					console.log(err)
