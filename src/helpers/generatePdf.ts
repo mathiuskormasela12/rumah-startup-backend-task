@@ -8,7 +8,13 @@ export default async (template: string): Promise<any> => {
 
 	await page.setContent(template)
 
-	const pdfBuffer = await page.pdf()
+	const pdfBuffer = await page.pdf({
+		format: 'a4',
+		margin: {
+			top: 30,
+			bottom: 50
+		}
+	})
 
 	await page.close()
 	await browser.close()

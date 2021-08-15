@@ -58,7 +58,7 @@ namespace AuthControllerModule {
 						return response(req, res, 'Wrong email or password', 400, false)
 					} else {
 						const token = jwt.sign({ id: results[0].id || '' }, config.secret_key || '', {
-							expiresIn: '1h'
+							expiresIn: config.expires_in
 						})
 
 						return response(req, res, 'Login successfully', 200, true, {

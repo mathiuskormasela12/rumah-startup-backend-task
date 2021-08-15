@@ -28,7 +28,11 @@ namespace StudentModule {
 								 LIMIT ${complexCondition.offset}, ${complexCondition.limit};
 					`
 				} else {
-					sql = `SELECT * FROM students WHERE ${Object.keys(condition).map((items, index) => `${items}='${Object.values(condition)[index]}'`)}`
+					sql = `
+								 SELECT * FROM students 
+								 INNER JOIN majors ON students.major = majors.id
+								 WHERE ${Object.keys(condition).map((items, index) => `students.${items}='${Object.values(condition)[index]}'`)}
+							  `
 				}
 
 				this.connection.query(sql, (err: Error, results: any[]) => {

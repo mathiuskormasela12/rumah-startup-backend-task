@@ -261,7 +261,13 @@ namespace StudentControllerModule {
 					try {
 						const results = await renderTemplate(file, {
 							student_name: reportData[0].student_name ? reportData[0].student_name : '-',
-							photo: reportData[0].photo ? String(process.env.PUBLIC_URL).concat('/photos', '/students/', reportData[0].photo) : '-'
+							photo: reportData[0].photo ? String(process.env.PUBLIC_URL).concat('/photos', '/students/', reportData[0].photo) : '-',
+							nisn: reportData[0].nisn ? reportData[0].nisn : '-',
+							class: reportData[0].class ? reportData[0].class : '-',
+							major: reportData[0].major ? `${reportData[0].major_description}` : '-',
+							email: reportData[0].email ? reportData[0].email : '-',
+							birthday: reportData[0].birthday ? `${reportData[0].birth_place}, ${moment(reportData[0].birthday).locale('id').format('DD MMMM YYYY')}` : '-',
+							now: moment().locale('id').format('DD MMMM YYYY')
 						})
 
 						try {
