@@ -32,7 +32,7 @@ namespace AuthControllerModule {
 								password: hashed
 							}
 							await users.create(data)
-							return response(req, res, 'Register successfully', 200, true, { ...req.body, password: hashed })
+							return response(req, res, 'Register successfully', 200, true, { ...req.body, password: undefined })
 						} catch (err) {
 							console.log(err)
 							return response(req, res, err.message, 500, false)
