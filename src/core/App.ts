@@ -65,10 +65,10 @@ namespace AppModule {
 
 			this.app.use(cors(corsOption))
 
-			this.app.use('/api/v2', authRoute.auth)
-			this.app.use('/api/v2', userRoute.user)
-			this.app.use('/api/v2', studentRoute.student)
-			this.app.use('/api/v2', majorRoute.major)
+			this.app.use('/api/v1', authRoute.auth)
+			this.app.use('/api/v1', userRoute.user)
+			this.app.use('/api/v1', studentRoute.student)
+			this.app.use('/api/v1', majorRoute.major)
 
 			database.sync()
 		}
