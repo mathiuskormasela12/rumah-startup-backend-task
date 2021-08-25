@@ -35,7 +35,7 @@ This is backend service for student management application with Node Js, Typescr
 
 ## Entity Relationship Diagram (ERD)
 
-![alt text](https://github.com/mathiuskormasela12/back-ams/blob/staging/screenshoot/ERD.png?raw=true)
+![alt text](https://github.com/mathiuskormasela12/back-ams/blob/main/screenshoot/ERD.png?raw=true)
 
 ## API SPECS
 
