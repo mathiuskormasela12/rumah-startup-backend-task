@@ -32,6 +32,11 @@ This is backend service for student management application with Node Js, Typescr
 	```bash
 	npm start
 	```
+
+## Entity Relationship Diagram (ERD)
+
+![alt text](https://github.com/mathiuskormasela12/back-ams/blob/staging/screenshoot/ERD.png?raw=true)
+
 ## API SPECS
 
 - POST `/api/v1/auth/register` Route for register new user
