@@ -6,12 +6,12 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node ./build/server.js",
-    "build": "tsc -p . && cp -r ./src/templates ./build/templates",
+    "build": "tsc -p .",
     "dev": "nodemon ./src/server.ts"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/mathiuskormasela12/back-ams.git"
+    "url": "git+https://github.com/mathiuskormasela12/rumah-startup-backend-task.git"
   },
   "keywords": [
     "school",
@@ -21,9 +21,9 @@
   "author": "Mathius Kormasela",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/mathiuskormasela12/back-ams/issues"
+    "url": "https://github.com/mathiuskormasela12/rumah-startup-backend-task/issues"
   },
-  "homepage": "https://github.com/mathiuskormasela12/back-ams#readme",
+  "homepage": "https://github.com/mathiuskormasela12/rumah-startup-backend-task#readme",
   "devDependencies": {
     "@types/compression": "^1.7.1",
     "@types/cors": "^2.8.12",
