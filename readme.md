@@ -1,6 +1,6 @@
-# Ams Backend
+# Backend Task Teman Startup
 
-This is backend service for student management application with Node Js, Typescript and MySQL.
+This is backend service for technical test at Teman Startup
 
 ## Installation 
 
@@ -33,101 +33,23 @@ This is backend service for student management application with Node Js, Typescr
 	npm start
 	```
 
-## Entity Relationship Diagram (ERD)
-
-![alt text](https://github.com/mathiuskormasela12/back-ams/blob/main/screenshoot/ERD.png?raw=true)
-
 ## API SPECS
 
-- POST `/api/v1/auth/register` Route for register new user
+- POST `/api/v1/order/register` Route for adding a new order
 
 	Request Body
 
 	```
 	{
-		"full_name": "user fullname",
-		"email": "user email",
-		"password": "user password"
+		"order_name": "your order name"
 	}
 	```
 
-- POST `/api/v1/auth/login` Route for login
+- GET `/api/v1/order/:id` Route for get order by id
 
-	Request Body
+- DELETE `/api/v1/order/:id` Route for delete order by id
 
-	```
-	{
-		"email": "user email",
-		"password": "user password"
-	}
-	```
-
-- GET `/api/v1/user/:id` Route for get user by id
-- PUT `/api/v1/user/:id` Route for edit user by id
-
-	Request Body (Multipart/Form-Data)
-
-	```
-	{
-		"full_name": "user fullname",
-		"email": "user email",
-		"old_password?": "user old password",
-		"new_password?": "user new password",
-		"repeat_password?": "user repeat new password",
-		"photo?": "user blob image"
-	}
-	```
-- DELETE `/api/v1/user/:id` Route for delete user by id
-- GET `/api/v1/student` Route for get all students
-- GET `/api/v1/student/:id` Route for get student by id
-- POST `/api/v1/student` Route for add new student
-
-	Request Body (Multipart/Form-Data)
-
-	```
-	{
-		"student_name": "student fullname",
-		"class": "student class",
-		"major": "student major",
-		"birthday": "student birthday",
-		"birth_place": "student birth place",
-		"nisn": "student nisn",
-		"email": "student email",
-		"photo": "student blob image"
-	}
-	```
-
-- PUT `/api/v1/student/:id` Route for edit student by id
-
-	Request Body (Multipart/Form-Data)
-
-	```
-	{
-		"student_name?": "student fullname",
-		"class?": "student class",
-		"major?": "student major",
-		"birthday?": "student birthday",
-		"birth_place?": "student birth place",
-		"nisn?": "student nisn",
-		"email?": "student email",
-		"photo?": "student blob image"
-	}
-	```
-
-- DELETE `/api/v1/student/:id` Route for delete student by id
-- GET `/api/v1/pdf/student/:id` Route for get student report by id
-- GET `/api/v1/major` Route for get all majors
-
-- POST `/api/v1/major` Route for add new major
-
-	Request Body
-
-	```
-	{
-		"major_name": "major name",
-		"major_description": "major description"
-	}
-	```
+- GET `/api/v1/orders?limit=yourLimitData&page=yourCurrentPage` Route for get all orders
 
 ## License
 [MIT](https://choosealicense.com/licenses/mit/)

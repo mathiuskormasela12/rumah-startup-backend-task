@@ -5,7 +5,6 @@ import cors from 'cors'
 import helmet from 'helmet'
 import compression from 'compression'
 import morgan from 'morgan'
-import path from 'path'
 
 // import database
 import Database from './Database'
@@ -17,10 +16,7 @@ import config from '../config'
 import IApp from '../config/IApp'
 
 // import all routes
-import authRoute from '../routes/Auth'
-import userRoute from '../routes/User'
-import studentRoute from '../routes/Student'
-import majorRoute from '../routes/Major'
+import orderRoute from '../routes/Order'
 
 const database = new Database.Database()
 
@@ -45,13 +41,6 @@ namespace AppModule {
 			this.app.use(express.urlencoded({ extended: false }))
 			this.app.use(express.json())
 
-			// setup static files
-			this.app.use(express.static(path.join(__dirname, '../../public')))
-
-			// setup template engine
-			this.app.set('views', path.join(__dirname, '../templates'))
-			this.app.set('view engine', 'hbs')
-
 			// setup cors
 			const corsOption = {
 				origin: function (origin: any, callback: any): void {
@@ -65,10 +54,7 @@ namespace AppModule {
 
 			this.app.use(cors(corsOption))
 
-			this.app.use('/api/v1', authRoute.auth)
-			this.app.use('/api/v1', userRoute.user)
-			this.app.use('/api/v1', studentRoute.student)
-			this.app.use('/api/v1', majorRoute.major)
+			this.app.use('/api/v1', orderRoute.order)
 
 			database.sync()
 		}
