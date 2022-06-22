@@ -35,7 +35,7 @@ This is backend service for technical test at Teman Startup
 
 ## API SPECS
 
-- POST `/api/v1/order/register` Route for adding a new order
+- POST `/api/v1/order` Route for adding a new order
 
 	Request Body
 
